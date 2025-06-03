@@ -1,20 +1,28 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Routes, Route } from 'react-router'
+import { useNavigate } from "react-router";
+import MenuImg from '../assets/menuIcon.png'
+import styles from './menu.module.css'
+import { useState } from "react";
 
-import './index.css'
-import App from './App.jsx'
-import UsersList from './usersList.jsx'
-import Dashboard from './Dashboard.jsx'
+export const Menu = () => {
+    const navigate = useNavigate();
+    const [open, setOpen] = useState(false)
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<App/>}/>
-        <Route path='/dashboard' element={<Dashboard/>}/>
-        <Route path='/userslist' element={<UsersList/>}/>
-      </Routes>
-    </BrowserRouter>
-  </StrictMode>,
-)
+    const goToUsers = () => navigate('/usersList')
+    const goToDashboard = () => navigate('/dashboard')
+    const logout = () => {
+        localStorage.removeItem('user')
+        navigate('/')
+    }
+
+    return(
+        <nav className={open ? styles.navBar : styles.navBarClosed}>
+            <img src={MenuImg} alt="Menu Icon" onClick={() => setOpen(prev => !prev)}/>
+            <p onClick={goToDashboard}>Dashboard</p>
+            <p>Criar usuario</p>
+            <p onClick={goToUsers}>Lista de usuarios</p>
+            <p>Criar produto</p>
+            <p>Lista de produtos</p>
+            <p onClick={logout}>Sair</p>
+        </nav>
+    )
+}
