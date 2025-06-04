@@ -3,9 +3,7 @@ import { api } from './api/api'
 import { useNavigate } from 'react-router'
 import { useState, useEffect } from 'react';
 
-import Icon from './assets/icons8-circled-right.gif'
-import IconLogin from './assets/icons8-crachá.gif'
-import Eye from './assets/icons8-visível.gif'
+import Icon from './assets/câmera.gif'
 
 
 function App() {
@@ -15,7 +13,6 @@ function App() {
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
   const [message, setMessage] = useState('')
-  const [showPassword, setShowPassword] = useState(false)
 
 
   useEffect(() => {
@@ -51,17 +48,14 @@ function App() {
       <div className={style.wrapForm}>
         <form onSubmit={handleLogin}>
           <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
-          <img className={style.iconLogin} src={IconLogin} alt="Icone arrow" />
+          <img className={style.Icon} src={Icon} alt="Icone arrow" />
           <h2>Login</h2>
           </div>
           <div style={{position: "relative", width: "100%"}}>
-            <img className={style.icon} src={Icon} alt="Icone arrow" />
             <input type="email" placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} required />
           </div>
           <div style={{position: "relative", width: "100%"}}>
-            <img className={style.icon} src={Icon} alt="Icone arrow" />
-            <input type={showPassword ? 'text' : 'password'} placeholder='Senha' value={password} onChange={(e) => setPassword(e.target.value)} required />
-            <img onClick={() => setShowPassword(prev => !prev)} style={{position: "absolute", width: '20px', borderRadius: '100%', right: '10px', top: '10px', cursor: 'pointer'}} src={Eye} alt="Olho da senha" />
+            <input type="password" placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} required />
           </div>
           <button type='submit'>Entrar</button>
           <p className={style.userCad}>Entre em contato</p>
@@ -74,3 +68,4 @@ function App() {
 }
 
 export default App
+
