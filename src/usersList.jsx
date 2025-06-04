@@ -5,21 +5,21 @@ import { api } from './api/api'
 import { Menu } from './components/menu'
 import { useNavigate } from 'react-router'
 
-
 function UsersList() {
   const navigate = useNavigate()
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [editUserId, setEditUserId] = useState(null)
-  const [editData, setEditData] = useState({name: '', email:'', password: ''})
+  const [editData, setEditData] = useState({name: '', email: '', password: ''})
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user')
     if(!storedUser) navigate('/')
   }, [navigate])
 
- const fetchUsers = async () => {
+
+    const fetchUsers = async () => {
       try {
         const response = await api.get('/users')
         setUsers(response.data)
@@ -67,7 +67,6 @@ function UsersList() {
   
   if (loading) return <p>Carregando usuarios...</p>
   if (error) return <p>{error}</p>
-
 
   return (
     <section>
